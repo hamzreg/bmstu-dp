@@ -35,9 +35,9 @@ int main(void)
     if (!strcmp(key, "$KEY"))
     {
         int n;
-
         printf("Input Fibonacci number ordinal: ");
         scanf("%d", &n);
+
         int num = fib32(n);
 
         printf("%d Fibonacci number is %d.", n, num);
