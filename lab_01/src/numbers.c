@@ -25,4 +25,3 @@ int fib32(int n)
 
     return num1;
 }
-

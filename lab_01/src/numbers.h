@@ -15,4 +15,3 @@
 int fib32(int n);
 
 #endif
-
