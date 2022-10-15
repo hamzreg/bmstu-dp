@@ -6,3 +6,4 @@
 
 # Executable files
 *.exe
+*.pyc
