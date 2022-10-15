@@ -1,5 +1,4 @@
 from random import shuffle, randint
-
 from constants import Settings
 
 

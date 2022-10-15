@@ -1,6 +1,6 @@
 from enigma.rotor import Rotor
-from constants import Settings
 from enigma.reflector import Reflector
+from constants import Settings
 
 
 class Enigma:
