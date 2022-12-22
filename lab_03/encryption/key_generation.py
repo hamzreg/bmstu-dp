@@ -1,16 +1,30 @@
-from bitarray import bitarray
 from dataclasses import dataclass
+
+from bitarray import bitarray
+from bitarray.util import hex2ba
 
 from encryption.tables import Tables
 
 
 @dataclass
 class Constants:
-    rounds_number = 16
+    START_LEN = 64
+    ROUNDS_NUMBER = 16
+
+
+def get_key_bits(key):
+    key_bits = hex2ba(key)
+
+    if len(key_bits) > Constants.START_LEN:
+        return key_bits[:Constants.START_LEN]
+
+    zeros = bitarray([0] * (Constants.START_LEN - len(key_bits)))
+    return zeros + key_bits
 
 
 def initial_permutation(key):
-    return bitarray([key[bit - 1] for bit in Tables.key_initial_permutation])
+    return bitarray([key[bit - 1] for bit in \
+                     Tables.KEY_INITIAL_PERMUTATION])
 
 
 def left_shift(key, offset):
@@ -21,7 +35,8 @@ def left_shift(key, offset):
 
 
 def contraction_permutation(key):
-    return bitarray([key[bit - 1] for bit in Tables.contraction_permutation])
+    return bitarray([key[bit - 1] for bit in \
+                     Tables.CONTRACTION_PERMUTATION])
 
 
 def generate_keys(key):
@@ -30,9 +45,9 @@ def generate_keys(key):
 
     keys = []
 
-    for round in range(Constants.rounds_number):
-        c = left_shift(c, Tables.shift[round])
-        d = left_shift(d, Tables.shift[round])
+    for round in range(Constants.ROUNDS_NUMBER):
+        c = left_shift(c, Tables.SHIFT[round])
+        d = left_shift(d, Tables.SHIFT[round])
 
         keys.append(contraction_permutation(c + d))
 

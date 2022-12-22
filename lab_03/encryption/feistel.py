@@ -1,21 +1,24 @@
+from dataclasses import dataclass
+
 from bitarray import bitarray
 from bitarray.util import ba2int
-from dataclasses import dataclass
 
 from encryption.tables import Tables
 
 
 @dataclass
 class Constants:
-    change_number = 8
+    CHANGES_NUMBER = 8
 
 
 def expanding_permutation(block):
-    return bitarray([block[bit - 1] for bit in Tables.expanding_permutation])
+    return bitarray([block[bit - 1] for bit in \
+                     Tables.EXPANDING_PERMUTATION])
 
 
 def final_permutation(block):
-    return bitarray([block[bit - 1] for bit in Tables.final_permutation])
+    return bitarray([block[bit - 1] for bit in \
+                     Tables.FINAL_PERMUTATION])
 
 
 def feistel_cipher(block, key):
@@ -25,11 +28,11 @@ def feistel_cipher(block, key):
     result = bitarray()
     i = 0
 
-    for change in range(Constants.change_number):
+    for change in range(Constants.CHANGES_NUMBER):
         row = int(str(z[i:i + 6][0]) + str(z[i:i + 6][5]), 2)
         column = ba2int(z[i + 1:i + 5])
 
-        result.extend(f'{Tables.s[change][row][column]:04b}')
+        result.extend(f'{Tables.S[change][row][column]:04b}')
 
         i += 6
 
