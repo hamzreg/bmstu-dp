@@ -34,7 +34,7 @@ def check_signature(path: str, signature_path: str, public_key: dict) -> bool:
 
 
 def signing() -> None:
-    path = input('Введите путь к файлу: ')
+    path = input('\nВведите путь к файлу: ')
 
     if not find_file(path):
         danger_message('Файл не найден.')
@@ -49,28 +49,28 @@ def signing() -> None:
     create_folder('signature/')
     file_signing(path, signature_path, private_key)
 
-    success_message(f'Подпись сохранена по пути:{signature_path}')
+    success_message(f'\nПодпись сохранена по пути:{signature_path}')
 
 
 def verification() -> None:
-    path = input('Введите путь к файлу: ')
+    path = input('\nВведите путь к файлу: ')
 
     if not find_file(path):
         danger_message('Файл не найден.')
         return
 
-    signature_path = input('Введите путь к электронной подписи: ')
+    signature_path = input('\nВведите путь к электронной подписи: ')
 
     if not find_file(signature_path):
         danger_message('Подпись не найдена.')
         return
 
-    key = input('Введите открытый ключ в формате E,N: ').split(',')
+    key = input('\nВведите открытый ключ в формате E,N: ').split(',')
     public_key = {'key': int(key[0]), 'module': int(key[1])}
 
     result = check_signature(path, signature_path, public_key)
 
     if result:
-        success_message('Данные подлинны.')
+        success_message('\nДанные подлинны.')
     else:
-        danger_message('Верификация неуспешна.')
+        danger_message('\nВерификация неуспешна.')
