@@ -26,11 +26,11 @@ def get_table_bits(table: dict) -> bitarray:
     bits = bitarray()
 
     items_number = len(table)
-    bits += f'{items_number:032b}'
+    bits += f'{items_number:016b}'
 
     for item in table.items():
         byte_bits = f'{item[0]:08b}'
-        frequency_bits = f'{item[1]:032b}'
+        frequency_bits = f'{item[1]:016b}'
         bits += byte_bits + frequency_bits
 
     return bits

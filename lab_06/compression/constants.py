@@ -10,4 +10,4 @@ class Mode(Enum):
 @dataclass
 class BitsNumber:
     BYTE = 8
-    FREQUENCY = 32
+    FREQUENCY = 16
